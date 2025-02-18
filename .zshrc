@@ -82,3 +82,10 @@ refresh() {
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+
+# If you are using ssh for github, this will bypass asking passphrase
+if ! pgrep -u "$USER" ssh-agent > /dev/null; then
+    eval "$(ssh-agent -s)"
+fi
+ssh-add ~/.ssh/id_rsa &> /dev/null
+
